@@ -13,7 +13,6 @@ PROJECT_DIR = os.path.dirname(__file__)
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
-autocmd File Type text setlocal textwidth=78
 
 PROJECT_DIR = os.path.dirname(__file__)
 

@@ -1,9 +1,15 @@
 # Django settings for pila project.
+
 import os
+
+import os.path
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+#Project dirctory
+PROJECT_DIR = os.path.dirname(__file__)
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -15,7 +21,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_DIR,'pejelagartodb'),                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_DIR, 'pejelargartodb'),                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -86,7 +92,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'c&bsm2gkcs(8-am2xfoe%ru#dx&drx%eqk3c+cx*8ye$teo&(f'
+SECRET_KEY = 'j)b@j3pwu9@7lwnm4(d48sh@xxnev@!b2io@357ebcuzv!%)^6'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

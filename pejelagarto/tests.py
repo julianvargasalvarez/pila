@@ -1,5 +1,48 @@
 from django.test import TestCase
-from models import Estudiante
+from models import Estudiante, Profesor, Acudiente
+
+
+class DatosBasicosProfesorRequeridosTest(TestCase):
+    def test_longitud_nombre_mayor_a_cero(self):
+        """
+        Prueba que el nombre ingresado tenga una
+        longitud mayor a cero.
+        """
+        profesor = Profesor()
+        profesor.nombre = "Julian"
+        profesor.edad = 30
+        profesor.save()
+        
+        p = Profesor.objects.all()[0]
+        self.assertEqual(p.nombre, "Julian")
+
+class DatosBasicosAcudienteRequeridosTest(TestCase):
+    def test_longitud_nombre_mayor_a_cero(self):
+        """
+        Prueba que el nombre ingresado tenga una
+        longitud mayor a cero.
+        """
+        acudiente = Acudiente()
+        acudiente.edad = 27
+        acudiente.nombre = "Julian"
+        acudiente.save()
+
+        a = Acudiente.objects.all()[0]
+        self.assertEqual(a.nombre, "Julian")
+
+class DatosBasicosEstudianteRequeridosTest(TestCase):
+    def test_longitud_nombre_mayor_a_cero(self):
+        """
+        Prueba que el nombre ingresado tenga una
+        longitud mayor a cero.
+        """
+        estudiante = Estudiante()
+        estudiante.edad = 0
+        estudiante.nombre = "Julian"
+        estudiante.save()
+
+        e = Estudiante.objects.all()[0]
+        self.assertEqual(e.nombre, "Julian")
 
 class MayorEdadTest(TestCase):
     def test_es_mayor_de_edad_con_18(self):

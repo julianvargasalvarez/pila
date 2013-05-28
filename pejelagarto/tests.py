@@ -1,4 +1,5 @@
 from django.test import TestCase
+from models import Estudiante
 
 class MayorEdadTest(TestCase):
     def test_es_mayor_de_edad_con_18(self):

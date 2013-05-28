@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+class Estudiante(models.Model):
+    edad = models.IntegerField()
+
+    def es_mayor_de_edad(self):
+        return self.edad > 17

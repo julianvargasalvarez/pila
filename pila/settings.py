@@ -8,11 +8,12 @@ import os.path
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-#Project dirctory
+# Project directory
 PROJECT_DIR = os.path.dirname(__file__)
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+autocmd File Type text setlocal textwidth=78
 
 PROJECT_DIR = os.path.dirname(__file__)
 
@@ -104,6 +105,8 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

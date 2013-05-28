@@ -1,5 +1,6 @@
 from django.test import TestCase
-from models import Estudiante
+from models import Estudiante, Profesor, Acudiente
+
 
 class DatosBasicosProfesorRequeridosTest(TestCase):
     def test_longitud_nombre_mayor_a_cero(self):
@@ -9,8 +10,9 @@ class DatosBasicosProfesorRequeridosTest(TestCase):
         """
         profesor = Profesor()
         profesor.nombre = "Julian"
+        profesor.edad = 30
         profesor.save()
-
+        
         p = Profesor.objects.all()[0]
         self.assertEqual(p.nombre, "Julian")
 
@@ -21,7 +23,7 @@ class DatosBasicosAcudienteRequeridosTest(TestCase):
         longitud mayor a cero.
         """
         acudiente = Acudiente()
-        acudiente.edad = 0
+        acudiente.edad = 27
         acudiente.nombre = "Julian"
         acudiente.save()
 

@@ -81,7 +81,8 @@ class DescuentoProgresivo(TestCase):
         carro = OrdenCompra()
         carro.save()
 
-        carro.productos.add(Producto(precio=10.0))
+        carro.productos.add(Producto.objects.create(precio=10.0))
+
         self.assertEqual(carro.total(), 10.0)
 
     def test_descuento_para_dos_productos_es_1_por_ciento(self):
@@ -92,8 +93,9 @@ class DescuentoProgresivo(TestCase):
         carro = OrdenCompra()
         carro.save()
 
-        carro.productos.add(Producto(precio=17.0))
-        carro.productos.add(Producto(precio=13.0))
+        carro.productos.add(Producto.objects.create(precio=17.0))
+        carro.productos.add(Producto.objects.create(precio=13.0))
+
         self.assertEqual(carro.total(), 29.7)
 
     def test_descuento_para_tres_productos_es_1_por_ciento(self):
@@ -104,9 +106,9 @@ class DescuentoProgresivo(TestCase):
         carro = OrdenCompra()
         carro.save()
 
-        carro.productos.add(Producto(precio=17.0))
-        carro.productos.add(Producto(precio=13.0))
-        carro.productos.add(Producto(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=17.0))
+        carro.productos.add(Producto.objects.create(precio=13.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
 
         self.assertEqual(carro.total(), 34.65)
 
@@ -118,10 +120,9 @@ class DescuentoProgresivo(TestCase):
         carro = OrdenCompra()
         carro.save()
 
-        carro.productos.add(Producto(precio=17.0))
-        carro.productos.add(Producto(precio=13.0))
-        carro.productos.add(Producto(precio=5.0))
-        carro.productos.add(Producto(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=17.0))
+        carro.productos.add(Producto.objects.create(precio=13.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
 
         self.assertEqual(carro.total(), 39.2)
-

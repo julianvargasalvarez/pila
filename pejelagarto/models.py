@@ -11,10 +11,16 @@ class Persona(models.Model):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return self.nombre
+
+class EstudianteManager(models.Manager):
+    def crear_estudiante(estudiante):
+        estudiante.edad = estudiante.edad if estudiante.edad else 0
 
 class Estudiante(Persona):
-    carne = models.CharField(max_length=7)
-
+    carne = models.CharField(max_length=7, default='12345')
+    objects = EstudianteManager()
 
 class Profesor(Persona):
     codigo = models.CharField(max_length=4)

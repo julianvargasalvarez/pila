@@ -1,6 +1,21 @@
 from django.test import TestCase
 from models import Estudiante, Profesor, Acudiente, OrdenCompra, Producto
+from views import index
 
+class IndexTest(TestCase):
+    def test_al_ir_al_home_deberia_abrir_index(self):
+        """
+        Prueba que es sitio este arriba y corrindo
+        cuando se va a la raiz
+        """
+        self.assertEqual(index({}).status_code, 200)
+ 
+    def test_al_ir_al_home_deberia_saludar(self):
+        """
+        Prueba que al ir al home se vea el mensaje
+        'hola mundo'
+        """
+        self.assertIn('hola mundo' ,index({}).content)
 
 class DatosBasicosProfesorRequeridosTest(TestCase):
     def test_longitud_nombre_mayor_a_cero(self):

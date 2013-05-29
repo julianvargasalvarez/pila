@@ -7,14 +7,11 @@ class EstudianteAdmin(admin.ModelAdmin):
             ('Informacion Personal',
                 {'fields':['nombre', 'edad', 'telefono']}), 
             ('Informacion colegial',
-                {'fields':['carne']}))
-
-    search_fields = ['nombre']
+                {'fields':['acudiente','carne']}))
 
     readonly_fields = ['carne']
-
+    search_fields = ['nombre', 'edad']
     list_display = ['nombre', 'edad', 'telefono', 'carne']
-
     list_filter = ['edad']
 
     def save_model(self, request, instance, form, change):

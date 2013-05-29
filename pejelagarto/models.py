@@ -21,6 +21,8 @@ class EstudianteManager(models.Manager):
 class Estudiante(Persona):
     carne = models.CharField(max_length=7, default='12345')
     objects = EstudianteManager()
+    acudiente = models.ForeignKey('Acudiente', null=True)
+
 
 class Profesor(Persona):
     codigo = models.CharField(max_length=4)

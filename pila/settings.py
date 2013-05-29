@@ -134,7 +134,7 @@ INSTALLED_APPS = (
     'pejelagarto',
     'django_extensions',
     # Uncomment the next line to enable the admin:
-
+    'south',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',

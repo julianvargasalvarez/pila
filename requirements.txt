@@ -1,0 +1,5 @@
+Django==1.5.1
+django-extensions==1.1.1
+django-extras==0.2.6b2
+ipython==0.13.2
+south==0.8

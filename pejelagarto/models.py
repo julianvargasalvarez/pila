@@ -42,8 +42,10 @@ class OrdenCompra(models.Model):
     def total(self):
         return self.aplicar_descuentos()
 
-
+class ProductoManager(models.Manager):
+    def cantidad_productos_vendidos(self):
+        return self.all().count()
 
 class Producto(models.Model):
-
     precio = models.FloatField()
+    objects = ProductoManager()

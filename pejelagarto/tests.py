@@ -1,5 +1,5 @@
 from django.test import TestCase
-from models import Estudiante, Profesor, Acudiente
+from models import Estudiante, Profesor, Acudiente, OrdenCompra, Producto
 
 
 class DatosBasicosProfesorRequeridosTest(TestCase):
@@ -71,3 +71,57 @@ class MayorEdadTest(TestCase):
         estudiante = Estudiante()
         estudiante.edad = 17
         self.assertEqual(estudiante.es_mayor_de_edad(), False)
+
+class DescuentoProgresivo(TestCase):
+    def test_descuento_para_un_producto_es_cero(self):
+        """
+        Cuando el carro de compras tiene solo un producto
+        el descuento aplicado es cero
+        """
+        carro = OrdenCompra()
+        carro.save()
+
+        carro.productos.add(Producto(precio=10.0))
+        self.assertEqual(carro.total(), 10.0)
+
+    def test_descuento_para_dos_productos_es_1_por_ciento(self):
+        """
+        Cuando el carro de compras tiene dos productos
+        es descuento es del uno por ciento
+        """
+        carro = OrdenCompra()
+        carro.save()
+
+        carro.productos.add(Producto(precio=17.0))
+        carro.productos.add(Producto(precio=13.0))
+        self.assertEqual(carro.total(), 29.7)
+
+    def test_descuento_para_tres_productos_es_1_por_ciento(self):
+        """
+        Cuando el carro de compras tiene tres productos
+        es descuento es del uno por ciento
+        """
+        carro = OrdenCompra()
+        carro.save()
+
+        carro.productos.add(Producto(precio=17.0))
+        carro.productos.add(Producto(precio=13.0))
+        carro.productos.add(Producto(precio=5.0))
+
+        self.assertEqual(carro.total(), 34.65)
+
+    def test_descuento_para_cuatro_productos_es_2_por_ciento(self):
+        """
+        Cuando el carro de compras tiene cuatro productos
+        es descuento es del dos por ciento
+        """
+        carro = OrdenCompra()
+        carro.save()
+
+        carro.productos.add(Producto(precio=17.0))
+        carro.productos.add(Producto(precio=13.0))
+        carro.productos.add(Producto(precio=5.0))
+        carro.productos.add(Producto(precio=5.0))
+
+        self.assertEqual(carro.total(), 39.2)
+

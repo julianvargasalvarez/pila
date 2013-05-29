@@ -126,3 +126,71 @@ class DescuentoProgresivo(TestCase):
         carro.productos.add(Producto.objects.create(precio=5.0))
 
         self.assertEqual(carro.total(), 39.2)
+
+    def test_descuento_para_mas_de_cuatro_productos_es_2_por_ciento(self):
+        """
+        Cuando el carro de compras tiene cuatro o mas productos
+        es descuento es del dos por ciento
+        """
+        carro = OrdenCompra()
+        carro.save()
+
+        carro.productos.add(Producto.objects.create(precio=17.0))
+        carro.productos.add(Producto.objects.create(precio=13.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+
+        self.assertEqual(carro.total(), 58.8)
+
+    def test_cantidad_productos_vendidos(self):
+        """
+        Prueba que la cantidad de productos vendidos corresponda
+        a la suma de los productos de todas las ordenes de compra
+        """
+        carro1 = OrdenCompra()
+        carro1.save()
+
+        carro1.productos.add(Producto.objects.create(precio=0.0))
+        carro1.productos.add(Producto.objects.create(precio=0.0))
+
+        carro2 = OrdenCompra()
+        carro2.save()
+
+        carro2.productos.add(Producto.objects.create(precio=0.0))
+        carro2.productos.add(Producto.objects.create(precio=0.0))
+        carro2.productos.add(Producto.objects.create(precio=0.0))
+        carro2.productos.add(Producto.objects.create(precio=0.0))
+
+        self.assertEqual(Producto.cantidad_productos_vendidos(), 6)
+
+    def test_total_vendido(self):
+        """
+        Prueba que el total vendido corresponda a la suma de todos
+        los productos vendidos incluyendo los descuentos
+        """
+        carro1 = OrdenCompra()
+        carro1.save()
+        carro1.productos.add(Producto.objects.create(precio=10.1))
+
+        carro2 = OrdenCompra()
+        carro2.save()
+        carro2.productos.add(Producto.objects.create(precio=17.0))
+        carro2.productos.add(Producto.objects.create(precio=13.0))
+        carro2.productos.add(Producto.objects.create(precio=5.0))
+
+        carro3 = OrdenCompra()
+        carro3.save()
+        carro.productos.add(Producto.objects.create(precio=17.0))
+        carro.productos.add(Producto.objects.create(precio=13.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+        carro.productos.add(Producto.objects.create(precio=5.0))
+
+        self.assertEqual(OrdenCompra.total_vendido(), 103.55)

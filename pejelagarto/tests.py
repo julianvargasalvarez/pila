@@ -193,4 +193,4 @@ class DescuentoProgresivo(TestCase):
         carro3.productos.add(Producto.objects.create(precio=5.0))
         carro3.productos.add(Producto.objects.create(precio=5.0))
 
-        self.assertEqual(OrdenCompra.total_vendido(), 103.55)
+        self.assertEqual(OrdenCompra.objects.total_vendido(), 103.55)

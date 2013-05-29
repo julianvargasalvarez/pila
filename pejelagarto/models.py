@@ -22,10 +22,19 @@ class Profesor(Persona):
 class Acudiente(Persona):
     casado = models.BooleanField()
 
+class OrdenCompraManager(models.Manager):
+    def total_vendido(self):
+        for item in self.all():
+            item.total()
+
+        total = self.all().aggregate(models.Sum('total2'))
+        return total['total2__sum']
 
 class OrdenCompra(models.Model):
 
     productos = models.ManyToManyField('Producto')
+    total2 = models.FloatField(null=True)
+    objects = OrdenCompraManager()
 
     def sub_total(self):
         total = self.productos.all().aggregate(models.Sum('precio'))
@@ -35,12 +44,17 @@ class OrdenCompra(models.Model):
         cantidad = self.productos.count()
         if cantidad == 2 or cantidad==3:
             sub_total = sub_total - (sub_total*0.01)
-        elif cantidad == 4:
+        elif cantidad >= 4:
             sub_total = sub_total - (sub_total*0.02)
         return sub_total
 
     def total(self):
-        return self.aplicar_descuentos()
+        total = self.aplicar_descuentos()
+        self.total2 = total
+        self.save()
+        return total
+
+        
 
 class ProductoManager(models.Manager):
     def cantidad_productos_vendidos(self):

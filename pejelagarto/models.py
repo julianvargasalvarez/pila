@@ -23,3 +23,27 @@ class Acudiente(Persona):
     casado = models.BooleanField()
 
 
+class OrdenCompra(models.Model):
+
+    productos = models.ManyToManyField('Producto')
+
+    def sub_total(self):
+        total = self.productos.all().aggregate(models.Sum('precio'))
+        return total['precio__sum']
+    def aplicar_descuentos(self):
+        sub_total = self.sub_total()
+        cantidad = self.productos.count()
+        if cantidad == 2 or cantidad==3:
+            sub_total = sub_total - (sub_total*0.01)
+        elif cantidad == 4:
+            sub_total = sub_total - (sub_total*0.02)
+        return sub_total
+
+    def total(self):
+        return self.aplicar_descuentos()
+
+
+
+class Producto(models.Model):
+
+    precio = models.FloatField()

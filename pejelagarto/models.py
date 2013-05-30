@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 
 class Persona(models.Model):
@@ -25,7 +26,16 @@ class Estudiante(Persona):
 
 
 class Profesor(Persona):
+    TITULOS = (
+            ('Ma','Matemáticas'),
+            ('Bi','Biología'),
+            ('Es','Español'),
+            ('Ci','Ciencias'),
+            ('Ef','Educación Física')
+            )
+
     codigo = models.CharField(max_length=4)
+    titulo = models.CharField(max_length=2, choices=TITULOS)
 
 class Acudiente(Persona):
     casado = models.BooleanField()
